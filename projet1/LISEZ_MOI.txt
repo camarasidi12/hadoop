@@ -1,0 +1,24 @@
+L'archive contient la correction du TP2. Le code est fortement commenté; mais n'hésitez pas à me contacter (ben@tokidev.fr) si questions.
+Le code de la classe driver (Graph.java) est le plus important; mais il est fortement recommandé de se familiariser avec les OutputFormat et InputFormat spécifiques aussi (et notamment GraphOutputFormat).
+
+L'archive contient par ailleurs un .jar: le programme compilé. Vous pouvez ainsi le tester si vous le souhaitez sur vos machines virtuelles; pour l'exécuter, vous pouvez par exemple faire:
+
+hadoop jar mbds_graph.jar org.mbds.hadoop.graph.Graph /graph_input.txt /graphout
+
+... en supposant que Hadoop soit démarré, que vous ayez copié le .jar sur la machine virtuelle, et que vous ayez placé le fichier d'entrée graph_input.txt sur HDFS dans /graph_input.txt. Le programme se sert du second argument de la ligne de commande comme d'un prefixe pour sauvegarder les différents steps d'exécution; ainsi, avec cet exemple, les steps seront sauvegardés dans /graphout-step-1, /graphout-step-2, etc...
+
+Si vous souhaitez uniquement visualiser les sorties du programme (et pas celles de Hadoop en général), vous pouvez aussi rediriger le flux d'erreur en faisant:
+
+hadoop jar mbds_graph.jar org.mbds.hadoop.graph.Graph /graph_input.txt /graphout 2>/dev/null
+
+... ce qui devrait vous donner en sortie (en supposant aucune modification de graph_input.txt):
+
+-----
+Exécution numéro #1: entrée '/graph_input.txt', sortie '/graphout-step-1'
+Ouverture du fichier 'hdfs://localhost:8020/graphout-step-1/RESULTATS-r-00000.txt' pour vérification...
+Exécution numéro #2: entrée '/graphout-step-1/RESULTATS*', sortie '/graphout-step-2'
+Ouverture du fichier 'hdfs://localhost:8020/graphout-step-2/RESULTATS-r-00000.txt' pour vérification...
+Exécution numéro #3: entrée '/graphout-step-2/RESULTATS*', sortie '/graphout-step-3'
+Ouverture du fichier 'hdfs://localhost:8020/graphout-step-3/RESULTATS-r-00000.txt' pour vérification...
+Tous les noeuds sont parcourus; parcours de graphe TERMINE.
+-----
